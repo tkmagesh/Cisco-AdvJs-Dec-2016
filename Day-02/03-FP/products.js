@@ -87,3 +87,82 @@ describe("Sorting", function(){
 		})
 	})
 });
+
+describe("Filtering", function(){
+	describe("All food products", function(){
+		function getFoodProducts(){
+			var result = [];
+			for(var i=0; i < products.length; i++)
+				if (products[i].category === 'food')
+					result.push(products[i]);
+			return result;
+		}
+		var foodProducts = getFoodProducts();
+		console.table(foodProducts);
+	})
+	describe("Any list by any criteria", function(){
+
+		function filter(list, criteriaFn){
+			var result = [];
+			for(var i=0; i < list.length; i++)
+				if (criteriaFn(list[i]))
+					result.push(list[i]);
+			return result;
+		}
+		describe("Products By Cost", function(){
+			var costlyProductCriteria = function(product){
+				return product.cost > 50;
+			}
+			describe("All costly products [cost > 50]", function(){
+				var costlyProducts = filter(products, costlyProductCriteria);
+				console.table(costlyProducts);	
+			});	
+			var affordableProductCriteria = function(product){
+				//return product.cost <= 50;
+				return !costlyProductCriteria(product);
+			}
+			describe("All affordable products [cost <= 50]", function(){
+				var affordableProducts = filter(products, affordableProductCriteria);
+				console.table(affordableProducts);
+			})
+		})
+		
+		describe("Products by units", function(){
+			var underStockedProductCriteria = function(product){
+				return product.units < 50;
+			};
+			describe("All understocked products [units < 50]", function(){
+				var understockedProducts = filter(products, underStockedProductCriteria);
+				console.table(understockedProducts);
+			})
+			var wellStockedProductCriteria = function(product){
+				return !underStockedProductCriteria(product);
+			}
+			describe("All well stocked products [!understockedProducts]", function(){
+				var wellStockedProducts = filter(products, wellStockedProductCriteria);
+				console.table(wellStockedProducts);
+			})
+		});
+	})
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
