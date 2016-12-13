@@ -6,6 +6,7 @@ var products = [
 	{id : 7, name : 'Bread', cost : 90, units : 50, category : 'food'}
 ];
 
+
 /*
 sort
 filter
@@ -160,8 +161,9 @@ describe("GroupBy", function(){
 		var result  = {};
 		for(var i=0; i < list.length; i++){
 			var key = keySelectorFn(list[i]);
-			if (typeof result[key] === 'undefined')
-				result[key] = [];
+			/*if (typeof result[key] === 'undefined')
+				result[key] = [];*/
+			result[key] = result[key] || [];
 			result[key].push(list[i]);
 		}
 		return result;
@@ -190,7 +192,14 @@ describe("GroupBy", function(){
 	})
 })
 
-
+function memoize(fn){
+	var cacheFn = function(n){
+		if (typeof cacheFn.cache[n] === 'undefined')
+			cacheFn.cache[n] = fn.apply(this, arguments);
+		return cacheFn.cache[n]
+	};
+	return cacheFn;
+}
 
 
 
