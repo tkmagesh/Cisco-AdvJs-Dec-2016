@@ -1,0 +1,20 @@
+{
+  "name": "04-es6app",
+  "version": "0.1.0",
+  "description": "a sample app for es6 demonstration",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build" : "babel src -d dist"
+  },
+  "keywords": [
+    "demo",
+    "es6"
+  ],
+  "author": "Magesh K",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-cli": "^6.18.0",
+    "babel-preset-latest": "^6.16.0"
+  }
+}
